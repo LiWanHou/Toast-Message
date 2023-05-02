@@ -17,7 +17,7 @@
     padding: 10px 0;
 } 
 .toast + .toast {
-    margin-top: 24px;
+    margin-top: 20px;
 }
 @keyframes slideFromLeft{
     from {

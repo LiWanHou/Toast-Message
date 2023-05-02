@@ -65,7 +65,7 @@
 
                 const autoRemoveToast = setTimeout(() => {
                     main.removeChild(toast)
-                }, duration + 1000);
+                }, duration + 500);
 
                 toast.onclick = function(e){
                     if (e.target.closest('.close')){
