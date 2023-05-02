@@ -1,0 +1,79 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+#toast {
+    position: fixed;
+    top: 32px;
+    right: 32px;
+}
+.toast {
+    display: flex;
+    align-items: center;
+    width: 450px;
+    box-shadow: 0px 2px 10px #999;
+    color: #333;
+    padding: 10px 0;
+} 
+.toast + .toast {
+    margin-top: 24px;
+}
+@keyframes slideFromLeft{
+    from {
+        opacity: 0;
+        transform: translateX(calc(100% + 32px));
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+.icon {
+    font-size: 30px;
+    width: 70px;
+    text-align: center;
+}
+.success .icon{
+    color: rgb(0, 156, 60);
+}
+.fail .icon{
+    color: rgb(189, 0, 142);
+}
+.body {
+    flex: 1;
+}
+.body p {
+    font-size: 20px;
+} 
+.close {
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+}
+.close:hover {
+    cursor: pointer;
+    color: #888;
+    transform: scale(1.1);
+    transition: all 0.3s;
+}
+.btn{
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    width: 170px;
+}
+.btn:hover {
+    cursor: pointer
+}
+.btn.success {
+    background-color: rgba(0, 255, 42, 0.5);
+}
+.btn.fail {
+    background-color: rgba(255, 0, 0, 0.5);
+}

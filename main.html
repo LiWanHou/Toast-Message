@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Message</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="toast">
+        
+    </div>
+    
+    <div id="btn">
+        <button class="btn success">
+            Click to see success
+        </button>
+        <button class="btn fail">
+            Click to see fail
+        </button>
+    </div>
+
+
+    <script>
+        $ = document.querySelector.bind(document)
+        $$ = document.querySelectorAll.bind(document)
+
+        const successBtn = $('.btn.success')
+        const failBtn = $('.btn.fail')
+        
+        function toast(
+            {
+                title = '',
+                message = '',
+                type = '',
+                duration = ''
+            }
+        ){
+            const main = document.getElementById('toast')
+            if (main){
+                const toast = document.createElement('div')
+                const icons = {
+                    success: 'checkmark-circle-outline',
+                    fail: 'close-circle-outline',
+                }
+                const icon = icons[type]
+                const delay = (duration / 1000).toFixed(2)
+    
+                toast.classList.add('toast', `${type}`)
+                toast.style.animation = `slideFromLeft ease 0.5s, fadeOut linear 1s ${delay}s forwards`
+                toast.innerHTML = `
+                    <div class="icon">
+                        <ion-icon name="${icon}"></ion-icon>
+                    </div>
+                    <div class="body">
+                        <h2 class="title">${title}</h2>
+                        <p class="message">${message}</p>
+                    </div>
+                    <div class="close">
+                        <ion-icon name="close-outline"></ion-icon>
+                    </div>
+                `
+                main.appendChild(toast)
+
+                const autoRemoveToast = setTimeout(() => {
+                    main.removeChild(toast)
+                }, duration + 1000);
+
+                toast.onclick = function(e){
+                    if (e.target.closest('.close')){
+                        main.removeChild(toast)
+                        clearTimeout(autoRemoveToast)
+                    }
+                }
+            }
+        }
+
+        successBtn.onclick = function(){
+            toast({
+                title: 'Success',
+                message: 'You succeeded to sign up',
+                type: 'success',
+                duration: 5000
+            })
+        }
+        failBtn.onclick = function(){
+            toast({
+                title: 'Failed',
+                message: 'You failed to sign up',
+                type: 'fail',
+                duration: 5000
+            })
+        }
+        
+    </script>
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
